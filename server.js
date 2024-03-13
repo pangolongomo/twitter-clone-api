@@ -4,7 +4,7 @@ const cors = require("cors");
 const initData = require("./utils/initData");
 
 const app = express();
-const port = parseInt(process.env.PORT);
+const port = 4000 || parseInt(process.env.PORT);
 
 app.use(cors());
 app.use(express.json());

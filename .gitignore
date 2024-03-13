@@ -129,5 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# 
+# initial setup
 /assets/data.json
+launch.json
+
+#
