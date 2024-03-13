@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3"
+  },
+  "scripts": {
+    "start": "nodemon --env-file=.env server.js"
+  },
+  "name": "twitter-clone-api-c3-pangolongomo",
+  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/oGCqfCKn)\r # starter-code-twitter-api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
