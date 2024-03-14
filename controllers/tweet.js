@@ -43,5 +43,5 @@ exports.getJoinedUserTweets = (req, res) => {
       createdAt,
     };
   });
-  res.json(joinedData);
+  res.status(200).json(joinedData);
 };

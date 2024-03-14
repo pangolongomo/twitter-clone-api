@@ -1,7 +1,7 @@
 const User = require("../models/user");
 exports.getConnectedUser = (req, res) => {
   const loggedInUser = User.getLoggedInUser();
-  res.json(loggedInUser);
+  res.status(200).json(loggedInUser);
 };
 
 exports.getSomeUsers = (req, res) => {
