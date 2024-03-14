@@ -18,11 +18,21 @@ exports.getJoinedUserTweets = (req, res) => {
       name = user.name;
       profilePicture = user.profilePicture;
     }
-    const { retweetCount, favoriteCount, repliesCount, text, createdAt } =
-      tweet;
+    const {
+      id,
+      retweetCount,
+      favoriteCount,
+      repliesCount,
+      media,
+      text,
+      createdAt,
+    } = tweet;
+
     return {
+      id,
       handle,
       name,
+      media,
       profilePicture,
       liked,
       shared,
