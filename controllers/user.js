@@ -27,3 +27,10 @@ exports.getSomeUsers = (req, res) => {
 
   res.status(200).json(someUsers);
 };
+
+exports.getUserByHandle = (req, res) => {
+  const handle = req.params.handle;
+  console.log(handle);
+  const user = User.getUserByHandle(handle);
+  res.status(200).json(user);
+};

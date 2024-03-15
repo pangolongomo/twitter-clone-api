@@ -15,6 +15,9 @@ class User {
   static getUserCount() {
     return users.length;
   }
+  static getUserByHandle(handle) {
+    return users.find((user) => user.handle === handle);
+  }
 }
 
 module.exports = User;

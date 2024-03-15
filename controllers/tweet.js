@@ -1,47 +1,16 @@
-const User = require("../models/user");
 const Tweet = require("../models/tweet");
+const joinData = require("../utils/joinTweetToUser");
 
 exports.getJoinedUserTweets = (req, res) => {
   const tweets = Tweet.getAllTweets();
-  const joinedData = tweets.map((tweet) => {
-    const user = User.getUserFromId(tweet.author);
-    const loggedInUser = User.getLoggedInUser();
-    const liked = loggedInUser.likedTweetIds.includes(tweet.id);
-    const shared = loggedInUser.sharedTweetIds.includes(tweet.id);
+  const joinedData = joinData(tweets);
+  res.status(200).json(joinedData);
+};
 
-    let handle = null,
-      name = null,
-      profilePicture = null;
-
-    if (user) {
-      handle = user.handle;
-      name = user.name;
-      profilePicture = user.profilePicture;
-    }
-    const {
-      id,
-      retweetCount,
-      favoriteCount,
-      repliesCount,
-      media,
-      text,
-      createdAt,
-    } = tweet;
-
-    return {
-      id,
-      handle,
-      name,
-      media,
-      profilePicture,
-      liked,
-      shared,
-      retweetCount,
-      favoriteCount,
-      repliesCount,
-      text,
-      createdAt,
-    };
-  });
+exports.getUserTweets = (req, res) => {
+  const userId = parseInt(req.params.userId);
+  //   res.send("mga");
+  const tweets = Tweet.getUserTweets(userId);
+  const joinedData = joinData(tweets);
   res.status(200).json(joinedData);
 };

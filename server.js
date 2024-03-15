@@ -11,8 +11,10 @@ app.use(express.json());
 
 const usersRoutes = require("./routes/users");
 const tweetsRoutes = require("./routes/tweets");
+const userRoutes = require("./routes/user");
 
 // Routes
+app.use("/user", userRoutes);
 app.use("/users", usersRoutes);
 app.use("/tweets", tweetsRoutes);
 
