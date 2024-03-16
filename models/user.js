@@ -1,5 +1,7 @@
-const users = require("../assets/data.json").users;
-const loggedInUserId = require("../assets/data.json").loggedInUserId;
+const { data } = require("../utils/accessData");
+
+const users = data.users;
+const loggedInUserId = data.loggedInUserId;
 class User {
   constructor() {}
 

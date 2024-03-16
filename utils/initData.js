@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const rootDir = require("./path");
 
-async function initData() {
+function initData() {
   const dataPath = path.join(rootDir, "assets", "data.json");
   const initialDataPath = path.join(rootDir, "assets", "initial-data.json");
   try {
@@ -11,9 +11,10 @@ async function initData() {
       const jsonData = JSON.parse(initialData);
 
       fs.writeFileSync(dataPath, JSON.stringify(jsonData));
-      return console.log("data initialized successfully");
+      console.log("data initialized successfully");
+    } else {
+      console.log("data already initialized");
     }
-    console.log("data already initialized");
   } catch (error) {
     console.log("Error initializing data".error);
   }

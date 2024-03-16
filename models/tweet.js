@@ -1,4 +1,6 @@
-const tweets = require("../assets/data.json").tweets;
+const { data } = require("../utils/accessData");
+
+const tweets = data.tweets;
 class Tweet {
   constructor() {}
 

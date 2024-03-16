@@ -6,6 +6,7 @@ const initData = require("./utils/initData");
 const app = express();
 const port = 4000 || parseInt(process.env.PORT);
 
+initData();
 app.use(cors());
 app.use(express.json());
 
@@ -18,8 +19,4 @@ app.use("/user", userRoutes);
 app.use("/users", usersRoutes);
 app.use("/tweets", tweetsRoutes);
 
-initData()
-  .then(() => {
-    app.listen(port, () => console.log("server listening on port", port));
-  })
-  .catch((err) => console.log("Error initializing data"));
+app.listen(port, () => console.log("server listening on port", port));
