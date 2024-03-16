@@ -1,7 +1,7 @@
 const User = require("../models/user");
 exports.getConnectedUser = (req, res) => {
   const loggedInUser = User.getLoggedInUser();
-  res.status(200).json(loggedInUser);
+  res.status(200).json(JSON.stringify(loggedInUser));
 };
 
 exports.getSomeUsers = (req, res) => {
@@ -25,12 +25,11 @@ exports.getSomeUsers = (req, res) => {
     }
   }
 
-  res.status(200).json(someUsers);
+  res.status(200).json(JSON.stringify(someUsers));
 };
 
 exports.getUserByHandle = (req, res) => {
   const handle = req.params.handle;
-  console.log(handle);
   const user = User.getUserByHandle(handle);
-  res.status(200).json(user);
+  res.status(200).json(JSON.stringify(user));
 };

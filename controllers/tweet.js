@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { data, dataPath } = require("../utils/accessData");
+const editTweetAction = require("../utils/editTweetActions");
 const Tweet = require("../models/tweet");
 const User = require("../models/user");
 const joinData = require("../utils/joinTweetToUser");
@@ -7,47 +8,24 @@ const joinData = require("../utils/joinTweetToUser");
 exports.getJoinedUserTweets = (req, res) => {
   const tweets = Tweet.getAllTweets();
   const joinedData = joinData(tweets);
-  res.status(200).json(joinedData);
+  res.status(200).json(JSON.stringify(joinedData));
 };
 
 exports.getUserTweets = (req, res) => {
   const userId = parseInt(req.params.userId);
   const tweets = Tweet.getUserTweets(userId);
   const joinedData = joinData(tweets);
-  res.status(200).json(joinedData);
+  res.status(200).json(JSON.stringify(joinedData));
 };
 
 exports.updateLike = (req, res) => {
   const tweetId = parseInt(req.params.tweetId);
-  const loggedInUser = User.getLoggedInUser();
-  const likedTweets = loggedInUser.likedTweetIds;
-  let newUsers;
-  if (likedTweets.includes(tweetId)) {
-    newUsers = data.users.map((mappedUser) => {
-      if (mappedUser.id !== loggedInUser.id) {
-        return mappedUser;
-      }
+  editTweetAction("likedTweetIds", tweetId);
+  res.status(200).json("tweet like updated");
+};
 
-      const likedTweetIds = likedTweets.filter((idFromLikeList) => {
-        return idFromLikeList !== tweetId;
-      });
-      return { ...mappedUser, likedTweetIds };
-    });
-  } else {
-    newUsers = data.users.map((mappedUser) => {
-      if (mappedUser.id !== loggedInUser.id) {
-        return mappedUser;
-      }
-      mappedUser.likedTweetIds.push(tweetId);
-      return mappedUser;
-    });
-  }
-
-  const newData = { ...data, users: newUsers };
-
-  const jsonData = JSON.stringify(newData, null, 2);
-
-  fs.writeFileSync(dataPath, jsonData, "utf-8");
-
+exports.updateShare = (req, res) => {
+  const tweetId = parseInt(req.params.tweetId);
+  editTweetAction("sharedTweetIds", tweetId);
   res.status(200).json("tweet like updated");
 };
